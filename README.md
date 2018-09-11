@@ -55,22 +55,34 @@ The following examples show the original image, the true label map and the predi
 
 !["camvid-segmentation-5"](images/camvid-segmentation-5.png?raw=true "camvid-segmentation-5")
 
-## Training metrics
+## Metrics
 
-Train metrics:
+### Evaluation metrics for the initial training
+
+Loss:
 
 <img src="images/camvid_eval_loss.png" height="384" width="480"/>
 
+Intersection over Union (IOU):
+
 <img src="images/camvid_eval_iou.png" height="384" width="480"/>
+
+Accuracy:
 
 <img src="images/camvid_eval_accuracy.png" height="384" width="480"/>
 
 
-Retrain metrics:
+### Evaluation metrics for the retraining
+
+Loss:
 
 <img src="images/camvid_eval_loss_retrain.png" height="384" width="480"/>
 
+Intersection over Union (IOU):
+
 <img src="images/camvid_eval_iou_retrain.png" height="384" width="480"/>
+
+Accuracy:
 
 <img src="images/camvid_eval_accuracy_retrain.png" height="384" width="480"/>
 
