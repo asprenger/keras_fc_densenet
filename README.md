@@ -59,17 +59,18 @@ The following examples show the original image, the true label map and the predi
 
 Train metrics:
 
-<img src="images/camvid_eval_loss.png" width="200" height="200"/>
+<img src="images/camvid_eval_loss.png" height="384" width="480"/>
 
-!["camvid_eval_iou"](images/camvid_eval_iou.png)
+<img src="images/camvid_eval_iou.png" height="384" width="480"/>
 
-<img src="images/camvid_eval_accuracy.png" width="200" height="200"/>
+<img src="images/camvid_eval_accuracy.png" height="384" width="480"/>
 
 
 Retrain metrics:
 
-!["camvid_eval_loss_retrain"](images/camvid_eval_loss_retrain.png?raw=true "camvid_eval_loss_retrain")
+<img src="images/camvid_eval_loss_retrain.png" height="384" width="480"/>
 
-!["camvid_eval_iou_retrain"](images/camvid_eval_iou_retrain.png?raw=true "camvid_eval_iou_retrain")
+<img src="images/camvid_eval_iou_retrain.png" height="384" width="480"/>
 
-!["camvid_eval_accuracy_retrain"](images/camvid_eval_accuracy_retrain.png?raw=true "camvid_eval_accuracy_retrain")
+<img src="images/camvid_eval_accuracy_retrain.png" height="384" width="480"/>
+
