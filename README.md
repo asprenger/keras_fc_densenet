@@ -11,7 +11,7 @@ order to compensate for the resolution loss induced by pooling layers, FCNs intr
 and upsampling paths. Skip connections help the upsampling path recover fine-grained information from the downsampling layers.
 
 One evolution of CNNs are [Residual Networks](https://arxiv.org/abs/1512.03385) (ResNets). ResNets are designed to ease the training of 
-very deep networks  by introducing a residual block that sums two the non-linear transformation of the input and its identity mapping. 
+very deep networks by introducing a residual block that sums the non-linear transformation of the input and its identity mapping. 
 The identity mapping is implemented by means of a shortcut connection. ResNets can be extended to work as FCNs. ResNets incorporate 
 shortcut paths to FCNs and increase the number of connections within a network. This additional shortcut paths improve the segmentation 
 accuracy and also help the network to converge faster.
