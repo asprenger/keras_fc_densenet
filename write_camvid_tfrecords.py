@@ -13,6 +13,7 @@ from PIL import Image
 import numpy as np
 import tensorflow as tf
 from camvid_utils import load_label_colors
+from common import open_image, split_dataset, write_tf_records
 
 def conv_label(label, label_code2id):
     """Map all color codes in `label_image` to code IDs.
@@ -37,48 +38,7 @@ def conv_label(label, label_code2id):
 
     return result
 
-def open_image(image_path, image_size): 
-    """Load an image and resize it.
-       Args:
-           image_path: path of image file
-           image_size: target size
-       Return:
-           array of shape (height, width, 3)
-    """
-    return np.array(Image.open(image_path).resize(image_size, Image.NEAREST))
 
-def int64_feature(value):
-    return tf.train.Feature(int64_list=tf.train.Int64List(value=[value]))
-
-def bytes_feature(value):
-    return tf.train.Feature(bytes_list=tf.train.BytesList(value=[value]))
-
-def write_tf_records(tfrecords_path, images, labels):
-    """Write images and labels as TFRecords to a file.
-    Args:
-    tfrecords_path: output path
-    images: array with images
-    labels: array with labels
-    """
-    with tf.python_io.TFRecordWriter(tfrecords_path) as writer:
-        for index in range(images.shape[0]):
-            feature = { 
-                        'height': int64_feature(images[index].shape[0]),
-                        'width': int64_feature(images[index].shape[1]),
-                        'label': bytes_feature(tf.compat.as_bytes(labels[index].tostring())), 
-                        'image': bytes_feature(tf.compat.as_bytes(images[index].tostring()))
-                      }
-            example = tf.train.Example(features=tf.train.Features(feature=feature))    
-            writer.write(example.SerializeToString())
-
-
-def split_dataset(images, labels, test_fraction):
-    nb_images = images.shape[0]
-    idxs = np.arange(nb_images)
-    np.random.shuffle(idxs)
-    test_idxs = idxs[0:int(idxs.shape[0] * test_fraction)]
-    train_idxs = idxs[int(idxs.shape[0] * test_fraction):]
-    return images[train_idxs,:,:,:], labels[train_idxs,:], images[test_idxs,:,:,:], labels[test_idxs,:]
 
 def main(input_path, output_path, image_height, image_width, test_fraction):
 

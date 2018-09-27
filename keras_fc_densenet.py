@@ -359,3 +359,15 @@ def build_FC_DenseNet103(nb_classes, final_softmax, input_shape=(224, 224, 3), d
                                name_scope='FCDenseNet103',
                                data_format=data_format)
     return Model(inputs=inputs, outputs=logits)
+
+
+def build_FC_DenseNet(model_version, nb_classes, final_softmax, input_shape=(224, 224, 3), dropout_rate=0.2, data_format='channels_last'):
+    if model_version == 'fcdn56':
+        return build_FC_DenseNet56(nb_classes, final_softmax, input_shape, dropout_rate, data_format)
+    elif model_version == 'fcdn67':
+        return build_FC_DenseNet67(nb_classes, final_softmax, input_shape, dropout_rate, data_format)
+    elif model_version == 'fcdn103':
+        return build_FC_DenseNet103(nb_classes, final_softmax, input_shape, dropout_rate, data_format)
+    else:
+        raise ValueError('Invalid model_version: %s' % model_version)
+

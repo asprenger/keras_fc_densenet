@@ -1,9 +1,7 @@
 """
 Utils for working with CamVid images.
 """
-import matplotlib.pyplot as plt
 import numpy as np
-import tensorflow as tf
 
 def normalize_image(images):
     """Normalize CamVid images to mean 0.0 and std 1.0. The method works 
@@ -62,12 +60,3 @@ def color_label(label, label_colors):
             o = label_colors[label[j,k]]
             res[j,k] = o
     return res
-
-def show_image_row(images, figsize=(15, 15), show_axis=True):
-    fig = plt.figure(figsize=figsize)
-    number_of_images = len(images)
-    for i in range(number_of_images):
-        a = fig.add_subplot(1, number_of_images, i+1)
-        plt.imshow(images[i])
-        if not show_axis:
-            plt.axis('off')

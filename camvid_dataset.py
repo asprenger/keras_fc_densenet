@@ -100,33 +100,34 @@ def dataset(tf_record_paths,
     ds = ds.map(_parse_tf_record, num_parallel_calls=num_parallel_reads)
     return ds
 
-def load_camvid_tfrecords(sess, input_path, max_images=None):
+def load_camvid_tfrecords(input_path, max_images=None):
     """Load the CamVid dataset and return as Numpy arrays.
        The images will be normalized.
        Args:
-           sess: TensorFlow Session
            input_path: path of a TFRecord file
+           max_images: max. number of images to return
        Return:
            images: float32 array with shape (None, height, width, 3)
            labels: int32 array with shape (None, height * width)
     """
     ds = dataset(input_path) # camvid_dataset.dataset() returns normalized images!
     iterator = ds.make_one_shot_iterator()
-    next_element = iterator.get_next()#
+    next_element = iterator.get_next()
 
-    images = []
-    labels = []
-    while True:
-        try:
-            image, label = sess.run(next_element)
-            images.append(image)
-            labels.append(label)
-            if len(images) == max_images:
-              break
-        except tf.errors.OutOfRangeError:
-            break
-            
-    images = np.array(images)
-    labels = np.array(labels)
-    return images, labels
+    with tf.Session() as sess:
+        images = []
+        labels = []
+        while True:
+            try:
+                image, label = sess.run(next_element)
+                images.append(image)
+                labels.append(label)
+                if len(images) == max_images:
+                  break
+            except tf.errors.OutOfRangeError:
+                break
+                
+        images = np.array(images)
+        labels = np.array(labels)
+        return images, labels
 
